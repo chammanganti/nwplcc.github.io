@@ -15,7 +15,7 @@
       id: "ops-manager",
       title: "Operations Manager",
       type: "Full-Time",
-      location: "Remote",
+      location: "Fully Remote",
       description:
         "Help drive the day-to-day execution of the business across teams, systems, and priorities. This role is ideal for someone highly organized, data-driven, and comfortable operating in a fast-moving environment where problem-solving and ownership matter.",
       formLink:
@@ -25,7 +25,7 @@
       id: "supply-chain",
       title: "Supply Chain Manager",
       type: "Full-Time",
-      location: "Remote / US",
+      location: "Fully Remote",
       description:
         "Lead and optimize the flow of products from sourcing to delivery, ensuring operational efficiency and customer satisfaction. This role is ideal for someone with strong analytical skills, supply chain experience, and the ability to manage vendors, forecasting, and logistics with precision.",
       formLink:
