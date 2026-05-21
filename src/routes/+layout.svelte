@@ -83,9 +83,10 @@
 <footer>
     <div class="footer-inner">
         <span class="footer-brand"></span>
-        <span class="footer-copy"
-            >© {new Date().getFullYear()} New World Project LLC. All rights reserved.</span
-        >
+        <span class="footer-copy">
+            © {new Date().getFullYear()} New World Project LLC. All rights reserved.&nbsp;|&nbsp;
+            <a class="privacy" href="/privacy-policy">Privacy Policy</a>
+        </span>
     </div>
 </footer>
 
@@ -286,6 +287,19 @@
         font-size: 0.75rem;
         color: #aaa;
         letter-spacing: 0.04em;
+    }
+
+    .footer-copy .privacy {
+        font-size: 0.75rem;
+        color: #aaa;
+        letter-spacing: 0.04em;
+        text-decoration: underline;
+        text-underline-offset: 3px;
+        transition: color 0.2s;
+    }
+
+    .footer-copy .privacy:hover {
+        color: #1a1a1a;
     }
 
     @media (max-width: 768px) {

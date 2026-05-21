@@ -153,6 +153,11 @@
             ></textarea>
           </div>
 
+          <p class="privacy-note">
+            By submitting this form, you agree to our
+            <a href="/privacy-policy">Privacy Policy</a>.
+          </p>
+
           <button type="submit" class="btn" disabled={submitting}>
             {submitting ? "Sending…" : "Send Message"}
           </button>
@@ -385,5 +390,19 @@
       grid-template-columns: 1fr;
       gap: 3rem;
     }
+  }
+
+  .privacy-note {
+    font-size: 0.75rem;
+    color: #aaa;
+    font-weight: 300;
+    margin-bottom: 1rem;
+    line-height: 1.6;
+  }
+
+  .privacy-note a {
+    color: #888;
+    text-decoration: underline;
+    text-underline-offset: 3px;
   }
 </style>

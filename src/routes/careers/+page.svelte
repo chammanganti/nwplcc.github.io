@@ -91,6 +91,10 @@
           {#if activeJob === job.id}
             <div class="job-body">
               <p class="job-description">{job.description}</p>
+              <p class="privacy-note">
+                By submitting this form, you agree to our
+                <a href="/privacy-policy">Privacy Policy</a>.
+              </p>
               <a href={job.formLink} target="_blank" class="btn"
                 >Apply for this role</a
               >
@@ -374,5 +378,19 @@
       grid-template-columns: 1fr;
       gap: 2rem;
     }
+  }
+
+  .privacy-note {
+    font-size: 0.75rem;
+    color: #aaa;
+    font-weight: 300;
+    margin-bottom: 1.25rem;
+    line-height: 1.6;
+  }
+
+  .privacy-note a {
+    color: #888;
+    text-decoration: underline;
+    text-underline-offset: 3px;
   }
 </style>
