@@ -1,8 +1,8 @@
-<script>
+<script lang="ts">
   import { browser } from "$app/environment";
-  import { enhance } from "$app/forms";
   import { page } from "$app/stores";
 
+  // svelte-ignore export_let_unused
   export let form;
 
   let roleParam = "";
@@ -20,6 +20,37 @@
   }
 
   let submitting = false;
+  let success = false;
+  let errorMsg = "";
+
+  async function handleSubmit(
+    event: Event & { currentTarget: EventTarget & HTMLFormElement },
+  ) {
+    event.preventDefault();
+    submitting = true;
+    errorMsg = "";
+
+    const formData = new FormData(event.currentTarget);
+
+    try {
+      const res = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        body: formData,
+      });
+
+      const data = await res.json();
+
+      if (data.success) {
+        success = true;
+      } else {
+        errorMsg = data.message || "Something went wrong. Please try again.";
+      }
+    } catch (err) {
+      errorMsg = "Network error. Please check your connection and try again.";
+    } finally {
+      submitting = false;
+    }
+  }
 </script>
 
 <svelte:head>
@@ -58,7 +89,7 @@
     </div>
 
     <div class="form-wrap">
-      {#if form?.success}
+      {#if success}
         <div class="success-state">
           <div class="success-icon" aria-hidden="true">✓</div>
           <h2>Message received.</h2>
@@ -66,18 +97,18 @@
           <a href="/" class="btn">Back to Home</a>
         </div>
       {:else}
-        <form
-          method="POST"
-          use:enhance={() => {
-            submitting = true;
-            return async ({ update }) => {
-              await update();
-              submitting = false;
-            };
-          }}
-        >
-          {#if form?.error}
-            <div class="form-error" role="alert">{form.error}</div>
+        <form on:submit={handleSubmit}>
+          <!-- Web3Forms access key -->
+          <input
+            type="hidden"
+            name="access_key"
+            value="c384a45d-1f28-41f1-8fc6-8b9ddb3466ce"
+          />
+          <!-- Honeypot spam protection -->
+          <input type="checkbox" name="botcheck" style="display:none" />
+
+          {#if errorMsg}
+            <div class="form-error" role="alert">{errorMsg}</div>
           {/if}
 
           {#if roleLabel}
@@ -95,7 +126,6 @@
               name="name"
               required
               autocomplete="name"
-              value={form?.values?.name ?? ""}
               placeholder="Your full name"
             />
           </div>
@@ -108,7 +138,6 @@
               name="email"
               required
               autocomplete="email"
-              value={form?.values?.email ?? ""}
               placeholder="you@example.com"
             />
           </div>
@@ -121,8 +150,7 @@
               rows="6"
               required
               placeholder="How can we help?"
-              >{form?.values?.message ?? ""}</textarea
-            >
+            ></textarea>
           </div>
 
           <button type="submit" class="btn" disabled={submitting}>
